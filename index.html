@@ -981,10 +981,47 @@
         max-height: 80vh;
     }
 
+    /* Mobile map fallback link — 데스크탑 숨김 */
+    .mobile-map-link { display: none; }
+
     /* =============================================
        MOBILE P0 PATCH (2026-04-15) — Swiper slide overflow + 터치영역 + input 폰트
        ============================================= */
     @media (max-width: 768px) {
+        /* --- PC 전용 섹션을 모바일에서 숨김 (m-* 모바일 섹션이 별도 존재) --- */
+        .header,
+        .section2 .section2-4,
+        .m-section2-4 { display: block; }
+        .section3,
+        .section4,
+        .section5,
+        .section6,
+        .section7,
+        .section8,
+        .section9,
+        .section10,
+        .section11,
+        .section12,
+        .section13,
+        .section14,
+        .footer { display: none !important; }
+        .m-header,
+        .m-section3,
+        .m-section4,
+        .m-section5,
+        .m-section6,
+        .m-section7,
+        .m-section8,
+        .m-section9,
+        .m-section10,
+        .m-section11,
+        .m-section12,
+        .m-section13,
+        .m-section14,
+        .m-footer { display: block !important; }
+        #float { display: none !important; }
+        #mfloat { display: block !important; }
+
         /* --- Swiper s1_swiper: 슬라이드 viewport 폭 강제 (loop 복제 슬라이드가 viewport 밖으로 늘어서는 P0 차단) --- */
         .section1,
         .section1 .s1_swiper,
@@ -1092,6 +1129,36 @@
             max-width: 100vw !important;
             overflow: hidden !important;
             box-sizing: border-box !important;
+        }
+
+        /* --- Daum 지도 위젯: 모바일에선 타일 이미지가 viewport 밖 끝없이 늘어남 → 위젯 자체 숨김 + 대체 링크 노출 --- */
+        .root_daum_roughmap,
+        [id^="daumRoughmapContainer"] {
+            display: none !important;
+        }
+        /* 대체 지도 링크 (HTML에 .mobile-map-link 추가됨) */
+        .mobile-map-link {
+            display: block !important;
+            text-align: center;
+            margin: 20px auto;
+            padding: 16px 20px;
+            background: #4aabea;
+            color: #fff !important;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px !important;
+            font-weight: 500;
+            min-height: 44px;
+            max-width: 90%;
+            box-sizing: border-box;
+        }
+
+        /* --- 마키(marquee) 가로 스크롤 차단 --- */
+        .marquee-wrap,
+        .m-section14 .marquee-wrap,
+        .section14 .marquee-wrap {
+            max-width: 100vw !important;
+            overflow: hidden !important;
         }
 
         /* --- input/textarea/select 폰트 16px 강제 (iOS 자동 줌 방지) --- */
@@ -1499,6 +1566,7 @@ $(function() {
                     "mapHeight" : "503"
                 }).render();
             </script>
+            <a class="mobile-map-link" href="https://map.kakao.com/?q=%EA%B4%91%EC%A3%BC%EA%B4%91%EC%97%AD%EC%8B%9C+%EC%84%9C%EA%B5%AC+%EC%83%81%EB%AC%B4%EC%A4%91%EC%95%99%EB%A1%9C+101" target="_blank">지도에서 위치 보기 (카카오맵)</a>
             <img class="m-section4-img" src="https://www.saeumdental.com/image/m-section4-img.png">
         </div>
 
